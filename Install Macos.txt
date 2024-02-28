@@ -1,0 +1,13 @@
+1a) Install python.org
+
+1b) Run "python -m ensurepip"
+
+1c) Run "pip3 install pysimplegui"
+
+2) Install dymo label software
+
+3) Install macports.org
+
+4) Run "sudo port install libimobiledevice"
+
+5) Click GUI.py
