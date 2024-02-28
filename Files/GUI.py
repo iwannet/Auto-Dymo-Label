@@ -3,6 +3,8 @@ import json
 import PySimpleGUI as sg
 from get_data import return_data, check_device_unlocked
 from gen_label import make_label
+import subprocess
+import platform
 data = {}
 checked_data = False
 
@@ -59,7 +61,10 @@ def open_label_button():
         return
     script_dir = os.path.dirname(os.path.abspath(__file__))
     gen_label_path = os.path.join(script_dir, "gen_label.dymo")
-    os.startfile(gen_label_path)
+    if platform.system() == 'Darwin':
+        subprocess.call(['open', gen_label_path])
+    elif platform.system() == 'Windows':
+        subprocess.Popen(['start', gen_label_path], shell=True)
 
 layout = [
     [sg.Text('Auto Dymo Label - Iwannet', font=('Helvetica', 20), justification='center')],
