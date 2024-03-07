@@ -1,10 +1,12 @@
 import os
 import json
-import PySimpleGUI as sg
+import tkinter as tk
+from tkinter import messagebox, simpledialog
 from get_data import return_data, check_device_unlocked
 from gen_label import make_label
 import subprocess
 import platform
+
 data = {}
 checked_data = False
 
@@ -14,50 +16,52 @@ def get_data_button():
         data = return_data()
         if data:
             device_status = 'Device connected' if 'No Device Connected' not in data.values() else 'No device connected'
-            window['-DEVICE_STATUS-'].update(value=device_status)
+            device_status_label.config(text=device_status)
             if device_status == 'Device connected':
-                sg.popup('Data successfully retrieved')
+                tk.messagebox.showinfo('Success', 'Data successfully retrieved')
         else:
-            sg.popup_error('There were errors retrieving data')
+            tk.messagebox.showerror('Error', 'There were errors retrieving data')
 
 def check_data_button():
     global checked_data
     if not data:
-        sg.popup('Please press "Get data" first')
+        tk.messagebox.showinfo('Info', 'Please press "Get data" first')
         return
     if 'No Device Connected' in data.values():
-        sg.popup('Please connect a device first')
+        tk.messagebox.showinfo('Info', 'Please connect a device first')
         return
     for key in ['BatteryHealth', 'Storage', 'IMEI', 'Model', 'Color']:
         if f'Unknown {key}' in data.values():
-            sg.popup(f'Unable to retrieve {key}')
-            data[key] = sg.popup_get_text(f'Enter {key}')
-    data['Quality'] = sg.popup_get_text('Enter Quality')
-    data['PayMethod'] = sg.popup_get_text('Enter Paymethod')
-    sg.popup('Data successfully checked')
-    window['-DATA_TEXT-'].update(value=json.dumps(data, indent=4))
+            tk.messagebox.showinfo('Info', f'Unable to retrieve {key}')
+            data[key] = tk.simpledialog.askstring(f'Enter {key}', f'Enter {key}')
+    data['Quality'] = tk.simpledialog.askstring('Enter Quality', 'Enter Quality')
+    data['PayMethod'] = tk.simpledialog.askstring('Enter Paymethod', 'Enter Paymethod')
+    tk.messagebox.showinfo('Success', 'Data successfully checked')
+    data_text.config(text=json.dumps(data, indent=4))
     checked_data = True
 
 def make_label_button():
     if not checked_data:
-        sg.popup('Please press "Check data" first')
+        tk.messagebox.showinfo('Info', 'Please press "Check data" first')
         return
     if 'No Device Connected' in data.values():
-        sg.popup('Please connect a device first')
+        tk.messagebox.showinfo('Info', 'Please connect a device first')
         return
-    try: make_label(data)
+    try:
+        make_label(data)
     except Exception as e:
-        sg.popup_error(f'Error generating label: {e}')
+        tk.messagebox.showerror('Error', f'Error generating label: {e}')
         return
-    sg.popup('Label generated')
-    window['-OPEN_LABEL-'].update(visible=True)
+    tk.messagebox.showinfo('Success', 'Label generated')
+    open_label_button.config(state='normal')
+    open_label_button.pack()
 
 def open_label_button():
     if not checked_data:
-        sg.popup('Please press "Check data" first')
+        tk.messagebox.showinfo('Info', 'Please press "Check data" first')
         return
     if 'No Device Connected' in data.values():
-        sg.popup('Please connect a device first')
+        tk.messagebox.showinfo('Info', 'Please connect a device first')
         return
     script_dir = os.path.dirname(os.path.abspath(__file__))
     gen_label_path = os.path.join(script_dir, "gen_label.dymo")
@@ -66,30 +70,28 @@ def open_label_button():
     elif platform.system() == 'Windows':
         subprocess.Popen(['start', gen_label_path], shell=True)
 
-layout = [
-    [sg.Text('Auto Dymo Label - Iwannet', font=('Helvetica', 20), justification='center')],
-    [sg.Button('Get Data', button_color=('white', 'blue'), size=(10, 2), key='-GET_DATA-', enable_events=True)],
-    [sg.Text('Device Status:', key='-DEVICE_STATUS-', size=(20, 1))],
-    [sg.Button('Check Data', button_color=('white', 'blue'), size=(10, 2), key='-CHECK_DATA-', enable_events=True)],
-    [sg.Button('Make Label', button_color=('white', 'blue'), size=(10, 2), key='-MAKE_LABEL-', enable_events=True)],
-    [sg.Button('Open Label', button_color=('white', 'green'), visible=False, key='-OPEN_LABEL-', enable_events=True)],
-    [sg.Text('', key='-DATA_TEXT-', size=(40, 10))]
-]
+root = tk.Tk()
+root.title('Label Generator')
 
-sg.theme('Dark Amber')
-window = sg.Window('Label Generator', layout, element_justification='center', margins=(30, 30))
+title_label = tk.Label(root, text='Auto Dymo Label - Iwannet', font=('Helvetica', 20))
+title_label.pack()
 
-while True:
-    event, values = window.read()
-    if event == sg.WINDOW_CLOSED:
-        break
-    elif event == '-GET_DATA-':
-        get_data_button()
-    elif event == '-CHECK_DATA-':
-        check_data_button()
-    elif event == '-MAKE_LABEL-':
-        make_label_button()
-    elif event == '-OPEN_LABEL-':
-        open_label_button()
+get_data_button = tk.Button(root, text='Get Data', bg='blue', fg='white', width=10, height=2, command=get_data_button)
+get_data_button.pack()
 
-window.close()
+device_status_label = tk.Label(root, text='Device Status:')
+device_status_label.pack()
+
+check_data_button = tk.Button(root, text='Check Data', bg='blue', fg='white', width=10, height=2, command=check_data_button)
+check_data_button.pack()
+
+make_label_button = tk.Button(root, text='Make Label', bg='blue', fg='white', width=10, height=2, command=make_label_button)
+make_label_button.pack()
+
+open_label_button = tk.Button(root, text='Open Label', bg='green', fg='white', width=10, height=2, state=tk.DISABLED, command=open_label_button)
+open_label_button.pack_forget()
+
+data_text = tk.Label(root, text='', width=40, height=10)
+data_text.pack()
+
+root.mainloop()

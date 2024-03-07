@@ -2,7 +2,7 @@
 
 1b) Run "python -m ensurepip"
 
-1c) Run "pip3 install pysimplegui"
+1c) Run "pip3 install tkinter"
 
 2) Install dymo label software
 
