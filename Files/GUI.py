@@ -6,6 +6,7 @@ from get_data import return_data, check_device_unlocked
 from gen_label import make_label
 import subprocess
 import platform
+from skip_activation import skip_activation
 
 data = {}
 checked_data = False
@@ -23,6 +24,15 @@ def get_data_button():
                 check_data_button.config(bg='red')
         else:
             tk.messagebox.showerror('Error', 'There were errors retrieving data')
+    elif check_device_unlocked() == "False":
+        tk.messagebox.showerror('Error', 'Device is unactivated')
+        tk.messagebox.showinfo('Info', 'Activating the device...')
+        status = skip_activation()
+        if status == 'Device activated':
+            tk.messagebox.showinfo('Info', 'Activated, Please press "Get data" again')
+        elif status != 'Device activated':
+            tk.messagebox.showerror('Error', status)
+        
 
 def check_data_button():
     global checked_data
@@ -70,11 +80,12 @@ def open_label_button():
         return
     script_dir = os.path.dirname(os.path.abspath(__file__))
     gen_label_path = os.path.join(script_dir, "gen_label.dymo")
+    gen_label_path = ("\"" + gen_label_path + "\"")
+    print(gen_label_path)
     if platform.system() == 'Darwin':
         subprocess.call(['open', gen_label_path])
     elif platform.system() == 'Windows':
         subprocess.Popen(['start', gen_label_path], shell=True)
-
 root = tk.Tk()
 root.configure(bg='gray')
 

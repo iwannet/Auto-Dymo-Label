@@ -50,11 +50,11 @@ def get_battery_health():
                         line = battery_health[i+1]
                         design_capacity = int(line.split('<integer>')[1].split('</integer>')[0])
             
-            if applerawmaxcapacity is not None and design_capacity is not None:
+            if applerawmaxcapacity is not None and design_capacity is not None and design_capacity != 0:
                 battery_health_percent = (applerawmaxcapacity / design_capacity) * 100
                 return battery_health_percent
 
-        return "Unknown Battery Health"
+        return "Unknown BatteryHealth"
     except subprocess.CalledProcessError:
         return "No Device Connected"
 
@@ -97,7 +97,7 @@ def get_storage():
     except subprocess.CalledProcessError:
         return "No Device Connected"
 
-    return "Unknown Disk Capacity"
+    return "Unknown Storage"
 
 
 def get_model():
@@ -247,7 +247,7 @@ def get_model():
             'iPod7,1': 'iPod touch (6th generation)',
             'iPod9,1': 'iPod touch (7th generation)'
         }
-        return model_mapping.get(product_type, 'Unknown Device')
+        return model_mapping.get(product_type, 'Unknown Model')
     except subprocess.CalledProcessError:
         return "No Device Connected"
 
