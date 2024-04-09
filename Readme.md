@@ -21,6 +21,13 @@ To run this project, you need to install the following dependencies:
 5. Double click on `GUI.py` to execute the project.
 
 Look at "Install Macos.txt" to see specific steps for macos
+## Todo
+- Fix Open Label button
+- Fix colors mac
+- Add check for update
+- Use github releases
+- fix battery data
+- better way to get the device color
 ## Screenshots
 
 
