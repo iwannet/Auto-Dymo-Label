@@ -45,7 +45,7 @@ def get_data_button():
             data[key] = tk.simpledialog.askstring(f'Enter {key}', f'Enter {key}')
     if 'Unknown Color' in data.values():
         color = tk.simpledialog.askstring('Enter Color', 'Enter Color')
-        data['Color'] = color[:2]
+        data['Color'] = color
     if 'No Device Connected' not in data.values():
         data['Quality'] = tk.simpledialog.askstring('Enter Quality', 'Enter Quality')
         cash_payment = tk.messagebox.askyesno('Payment', 'Was the device paid with cash/card?')
