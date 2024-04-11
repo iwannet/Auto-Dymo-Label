@@ -19,7 +19,8 @@ To run this project, you need to install the following dependencies:
 2. Install Python 3.x and Dymo Label Software.
 3. Install the `tkinter` library by running `python -m pip install tkinter`.
 4. Install the `libimobiledevice` library. You can find installation instructions for Windows on the [GitHub repository](https://github.com/libimobiledevice/libimobiledevice) or unofficial precompiled files for [Windows](https://github.com/L1ghtmann/libimobiledevice)
-5. Double click on `GUI.py` to execute the project.
+5. Add the libimobiledevice folder to your path
+6. Double click on `GUI.py` to execute the project.
 
 ### MacOs
 1. Download the repository to your local machine.
