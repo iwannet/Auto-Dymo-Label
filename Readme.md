@@ -14,13 +14,23 @@ To run this project, you need to install the following dependencies:
   
 ## General Installation
 
+### Windows
 1. Download the repository to your local machine.
 2. Install Python 3.x and Dymo Label Software.
 3. Install the `tkinter` library by running `python -m pip install tkinter`.
-4. Install the `libimobiledevice` library. You can find installation instructions for different platforms on the [GitHub repository](https://github.com/libimobiledevice/libimobiledevice) or unofficial precompiled files for  [Windows](https://github.com/L1ghtmann/libimobiledevice) or [Mac](https://gist.github.com/nikias/84c79469a1d0f16ff95250f0d51858c3).
+4. Install the `libimobiledevice` library. You can find installation instructions for Windows on the [GitHub repository](https://github.com/libimobiledevice/libimobiledevice) or unofficial precompiled files for [Windows](https://github.com/L1ghtmann/libimobiledevice)
 5. Double click on `GUI.py` to execute the project.
 
-Look at "Install Macos.txt" to see specific steps for macos
+### MacOs
+1. Download the repository to your local machine.
+2. Install Python 3.x from python.org
+3. Run the command `python -m ensurepip` in the terminal.
+4. Install the `tkinter` library by running `pip3 install tkinter`.
+5. Install the Dymo Label Software.
+6. Install MacPorts from macports.org.
+7. Run the command `sudo port install libimobiledevice` in the terminal.
+8. Click on `GUI.py` to execute the project.
+
 ## Todo
 - ~~Fix Open Label button~~
 - Fix colors mac
