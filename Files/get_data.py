@@ -82,12 +82,15 @@ def get_color():
             '1': 'Zwart',
             '2': 'Wit',
             '3': 'Goud',
-            '4': 'Roos',
+            '4': 'Roze',
             '5': 'Grijs',
             '6': 'Rood',
             '7': 'Geel',
             '8': 'Oranje',
-            '9': 'Blauw'
+            '9': 'Blauw',
+            '17': 'Paars',
+            '18': 'Groen',
+            
         }
         return color_mapping.get(color_code, 'Unknown Color')
     except subprocess.CalledProcessError:

@@ -1,6 +1,6 @@
 # Auto Dymo Label
 
-This project contains a collection of Python files that automate the process of creating labels for a Dymo label printer.
+This project contains some Python Scripts to automatically Create Dymo Labels For Iphones And Ipads
 
 
 ## Dependencies
@@ -35,10 +35,9 @@ To run this project, you need to install the following dependencies:
 ## Todo
 - ~~Fix Open Label button~~
 - Fix colors mac
-- ~~Use github releases~~
 - ~~fix battery data~~
 - ~~better way to get the device color~~
-- still even better way to get the device color
+- ~~still even better way to get the device color~~
 - ~~add info about marge vs btw~~
 - ~~Reduce number of steps and buttons needed to make a label~~
 ## Screenshots
