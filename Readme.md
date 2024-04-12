@@ -5,11 +5,12 @@ This project contains some Python Scripts to automatically Create Dymo Labels Fo
 ## Windows
 
 ### Install dependencies
+1. Install git using `winget install git` in the cmd
 2. Install Python 3.x and Dymo Label Software.
-3. Install the `tkinter` library by running `python -m pip install tkinter`.
+3. Install the `tkinter` library by running `python -m pip install tkinter` from the cmd.
 4. Install the `libimobiledevice` library. You can find installation instructions for Windows on the [GitHub repository](https://github.com/libimobiledevice/libimobiledevice) or unofficial precompiled files for [Windows](https://github.com/L1ghtmann/libimobiledevice)
 5. Add the libimobiledevice folder to your path
-6. Download And Run Update-Windows.bat from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/latest)
+6. Download And Run Update-Windows.bat from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/latest)       (if the files dont load, try to download from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/expanded_assets/V2.1))
 
 ### Start The script
 
@@ -27,16 +28,18 @@ This project contains some Python Scripts to automatically Create Dymo Labels Fo
 3. Install the `tkinter` library by running `pip3 install tkinter`.
 4. Install the Dymo Label Software.
 5. Install MacPorts from [macports.org](macports.org).
-6. Run the command `sudo port install libimobiledevice` in the terminal.
-7. Download `Update-Mac.command` from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/latest)
-8. Make it excecutable by running `chmod +x /path/to/Update-Mac.command`
-9. Now open the `Update-Mac.command` file.
+6. Install git using `sudo port install git`
+7. Run the command `sudo port install libimobiledevice` in the terminal.
+8. Download `Update-Mac.command` from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/latest)   (if the files dont load, try to download from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/expanded_assets/V2.1))
+9. Make it excecutable by running `chmod +x /path/to/Update-Mac.command`
+10. Now right click the `Update-Mac.command` file and click open.
 ### Start the script
 
-1. Download `Start-Mac.command` from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/latest)
+1. Download `Start-Mac.command` from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/latest)   (if the files dont load, try to download from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/expanded_assets/V2.1))
 2. Make it excecutable by running `chmod +x /path/to/Start-Mac.command`
-3. Now open the script
+3. Right click the script and click open
 
+From now on, you can just double click the script instead
 For easier access, make an alias to the homescreen or just move the start file to the homescreen
 ### Updating
 
