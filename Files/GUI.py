@@ -7,6 +7,7 @@ import subprocess
 import platform
 from skip_activation import skip_activation
 import os
+import sys
 
 data = {}
 checked_data = False
@@ -87,6 +88,9 @@ def open_label_():
     elif platform.system() == 'Windows':
         subprocess.run(['start', gen_label_path], shell=True)
 
+def restart_app():
+    os.execl(sys.executable, sys.executable, *sys.argv) 
+       
 root = tk.Tk()
 root.configure(bg='gray')
 
@@ -104,6 +108,7 @@ device_status_label.pack()
 def make_label_button_click():
     make_label_()
     open_label_()
+    restart_app()
 
 make_label_button = tk.Button(root, text='Make Label', bg='gray', fg='white', width=12, height=3, command=make_label_button_click)
 make_label_button.pack()
