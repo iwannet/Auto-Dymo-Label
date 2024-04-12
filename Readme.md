@@ -28,22 +28,19 @@ This project contains some Python Scripts to automatically Create Dymo Labels Fo
 4. Install the Dymo Label Software.
 5. Install MacPorts from [macports.org](macports.org).
 6. Run the command `sudo port install libimobiledevice` in the terminal.
-7. Download `Update-Mac.sh` from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/latest)
-8. Make it excecutable by running `chmod +x /path/to/Update-Mac.sh`
-9. Right-click (or Ctrl-click) on the .sh file in Finder.
-10. Select `"Get Info"` from the context menu that appears.
-11. In the `"Open With"` section, click the dropdown menu. If Terminal is not listed, select `"Other"`.
-12. In the dialog that appears, navigate to Applications > Utilities, then select Terminal.
-13. Click `"Add"`, then `"Change All…"` to apply this to all .sh files.
-14. Now Double click the `Update-Mac.sh` file
+7. Download `Update-Mac.command` from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/latest)
+8. Make it excecutable by running `chmod +x /path/to/Update-Mac.command`
+9. Now open the `Update-Mac.command` file.
 ### Start the script
 
-1. Download `Start-Mac.sh` from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/latest)
-2. Make it excecutable by running `chmod +x /path/to/Start-Mac.sh`
-3. Run the script
+1. Download `Start-Mac.command` from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/latest)
+2. Make it excecutable by running `chmod +x /path/to/Start-Mac.command`
+3. Now open the script
+
+For easier access, make an alias to the homescreen or just move the start file to the homescreen
 ### Updating
 
-1. Run `Update-Mac.sh` again
+1. Double click `Update-Mac.command`
 
 
 
