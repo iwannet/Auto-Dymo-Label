@@ -30,15 +30,12 @@ This project contains some Python Scripts to automatically Create Dymo Labels Fo
 
 ### Start the script
 
-1. Right click the `Open-Mac.command` script on the desktop, and click open
+1. Double click `Open-Mac.command` script on the desktop
 
-From now on, you can just double click the script instead
 
 ### Updating
 
-1. Right click the `Update-Mac.command` script on the desktop, and click open
-
-From now on, you can just double click the script instead
+1. Double click `Update-Mac.command` script on the desktop
 
 
 ## Screenshots
