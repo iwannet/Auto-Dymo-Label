@@ -35,7 +35,7 @@ def get_data_button():
 
     global checked_data
     if not data:
-        print('Please press "Get data" first\n')
+        print('Please connect a device and unlock it\n')
         return
     if 'No Device Connected' in data.values():
         print('Please connect a device first\n')
@@ -61,7 +61,7 @@ def get_data_button():
 
 def make_label_():
     if not checked_data:
-        print('Please press "Check data" first\n')
+        print('Please press "Get data" first\n')
         return
     if 'No Device Connected' in data.values():
         print('Please connect a device first\n')
@@ -72,10 +72,13 @@ def make_label_():
         print(f'Error generating label: {e}\n')
         return
     print('Label generated\n')
+    make_label = True
 def open_label_():
     if not checked_data:
-        print('Please press "Check data" first\n')
+        print('Please press "Get data" first\n')
         return
+    if not make_label:
+        print('Please press "Make label" first\n')
     if 'No Device Connected' in data.values():
         print('Please connect a device first\n')
         return
