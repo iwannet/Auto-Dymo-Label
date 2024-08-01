@@ -7,7 +7,7 @@ This project contains some Python Scripts to automatically Create Dymo Labels Fo
 ### Install dependencies
 1. Install git using `winget install git` in the cmd
 2. Install Python 3.x and Dymo Label Software.
-3. Install the `tkinter` library by running `python -m pip install tkinter` from the cmd.
+3. Install the `FreeSimpleGUI` library by running `python -m pip install FreeSimpleGUI` from the cmd.
 4. Install the `libimobiledevice` library. You can find installation instructions for Windows on the [GitHub repository](https://github.com/libimobiledevice/libimobiledevice) or unofficial precompiled files for [Windows](https://github.com/L1ghtmann/libimobiledevice)
 5. Add the libimobiledevice folder to your path
 6. Download And Run Update-Windows.bat from [here](https://github.com/iwannet/Auto-Dymo-Label/releases/latest)
@@ -15,6 +15,7 @@ This project contains some Python Scripts to automatically Create Dymo Labels Fo
 ### Start The script
 
 1. Double click on `GUI.py` in the files folder to execute the project.
+
 ### Updating
 
 1. Click `Update-Windows.bat` again

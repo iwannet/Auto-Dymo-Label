@@ -1,6 +1,5 @@
 import json
-import tkinter as tk
-from tkinter import simpledialog
+import FreeSimpleGUI as sg
 from get_data import return_data, check_device_unlocked
 from gen_label import make_label
 import subprocess
@@ -18,10 +17,10 @@ def get_data_button():
         data = return_data()
         if data:
             device_status = 'Device connected' if 'No Device Connected' not in data.values() else 'No device connected'
-            device_status_label.config(text=device_status, bg='gray')
+            window['device_status'].update(device_status)
             if device_status == 'Device connected':
                 print('Data successfully retrieved\n')
-                get_data_button.config(bg='gray')
+                window['get_data'].update(button_color=('white', 'gray'))
         else:
             print('There were errors retrieving data\n')
     elif check_device_unlocked() == "False":
@@ -33,7 +32,6 @@ def get_data_button():
         elif status != 'Device activated':
             print(status + '\n')
 
-    global checked_data
     if not data:
         print('Please connect a device and unlock it\n')
         return
@@ -43,21 +41,21 @@ def get_data_button():
     for key in ['BatteryHealth', 'Storage', 'IMEI', 'Model']:
         if f'Unknown {key}' in data.values():
             print(f'Unable to retrieve {key}\n')
-            data[key] = tk.simpledialog.askstring(f'Enter {key}', f'Enter {key}')
+            data[key] = sg.popup_get_text(f'Enter {key}')
     if 'Unknown Color' in data.values():
-        color = tk.simpledialog.askstring('Enter Color', 'Enter Color')
+        color = sg.popup_get_text('Enter Color')
         data['Color'] = color
     if 'No Device Connected' not in data.values():
-        data['Quality'] = tk.simpledialog.askstring('Enter Quality', 'Enter Quality')
-        cash_payment = tk.messagebox.askyesno('Payment', 'Was the device paid with cash/card?')
-        if cash_payment:
+        data['Quality'] = sg.popup_get_text('Enter Quality')
+        cash_payment = sg.popup_yes_no('Was the device paid with cash/card? (yes = Marge, no = BTW)')
+        if cash_payment == 'Yes':
             data['PayMethod'] = 'Marge'
         else:
             data['PayMethod'] = 'BTW'
     print('Data successfully checked\n')
-    data_text.config(text=json.dumps(data, indent=4), bg='white')
+    window['data_text'].update(json.dumps(data, indent=4))
     checked_data = True
-    make_label_button.config(bg='green')
+    window['make_label'].update(button_color=('white', 'green'))
 
 def make_label_():
     if not checked_data:
@@ -72,13 +70,12 @@ def make_label_():
         print(f'Error generating label: {e}\n')
         return
     print('Label generated\n')
-    make_label = True
+    return True
+
 def open_label_():
     if not checked_data:
         print('Please press "Get data" first\n')
         return
-    if not make_label:
-        print('Please press "Make label" first\n')
     if 'No Device Connected' in data.values():
         print('Please connect a device first\n')
         return
@@ -92,31 +89,27 @@ def open_label_():
         subprocess.run(['start', gen_label_path], shell=True)
 
 def restart_app():
-    os.execl(sys.executable, sys.executable, *sys.argv) 
-       
-root = tk.Tk()
-root.configure(bg='gray')
+    os.execl(sys.executable, sys.executable, *sys.argv)
 
-root.title('Label Generator')
+layout = [
+    [sg.Text('Auto Dymo Label - Iwannet', font=('Helvetica', 30))],
+    [sg.Button('Get Data', key='get_data', button_color=('white', 'red'), size=(12, 3))],
+    [sg.Text('Device Status:', key='device_status')],
+    [sg.Button('Make Label', key='make_label', button_color=('white', 'gray'), size=(12, 3))],
+    [sg.Multiline('', key='data_text', size=(60, 12), disabled=True)]
+]
 
-title_label = tk.Label(root, text='Auto Dymo Label - Iwannet', font=('Helvetica', 30))
-title_label.pack()
+window = sg.Window('Label Generator', layout)
 
-get_data_button = tk.Button(root, text='Get Data', bg='red', fg='white', width=12, height=3, command=get_data_button)
-get_data_button.pack()
+while True:
+    event, values = window.read()
+    if event == sg.WINDOW_CLOSED:
+        break
+    elif event == 'get_data':
+        get_data_button()
+    elif event == 'make_label':
+        if make_label_():
+            open_label_()
+            restart_app()
 
-device_status_label = tk.Label(root, text='Device Status:', bg='gray')
-device_status_label.pack()
-
-def make_label_button_click():
-    make_label_()
-    open_label_()
-    restart_app()
-
-make_label_button = tk.Button(root, text='Make Label', bg='gray', fg='white', width=12, height=3, command=make_label_button_click)
-make_label_button.pack()
-
-data_text = tk.Label(root, text='', width=40, height=12, bg='gray')
-data_text.pack()
-
-root.mainloop()
+window.close()
